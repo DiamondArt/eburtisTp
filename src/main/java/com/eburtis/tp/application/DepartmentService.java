@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/*******************************************************************
+ * Department service
+ * @author  Melissa Kouadio
+ * @version 1.0
+ *****************************************************************/
 @Service
 public class DepartmentService implements DepartmentImplementation {
 

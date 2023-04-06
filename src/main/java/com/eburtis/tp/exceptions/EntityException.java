@@ -1,5 +1,10 @@
 package com.eburtis.tp.exceptions;
 
+/*******************************************************************
+ * Entity Exception Formatting
+ * @author  Melissa Kouadio
+ * @version 1.0
+ *****************************************************************/
 public class EntityException extends  Exception{
     public EntityException() {
         super();

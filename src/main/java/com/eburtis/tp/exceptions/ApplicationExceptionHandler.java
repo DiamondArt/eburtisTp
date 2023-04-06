@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/*******************************************************************
+ * Handler Exception Message Formatting
+ * @author  Melissa Kouadio
+ * @version 1.0
+ *****************************************************************/
 @RestControllerAdvice
 public class ApplicationExceptionHandler {
 
