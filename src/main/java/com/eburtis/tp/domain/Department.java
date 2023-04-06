@@ -13,6 +13,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.util.Date;
 import java.util.List;
 
+
+/*******************************************************************
+ * Department entity
+ * @author  Melissa Kouadio
+ * @version 1.0
+ *****************************************************************/
 @Entity
 @Data
 @AllArgsConstructor

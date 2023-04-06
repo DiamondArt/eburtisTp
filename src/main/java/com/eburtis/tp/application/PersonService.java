@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/*******************************************************************
+ * Person Service
+ * @author  Melissa Kouadio
+ * @version 1.0
+ *****************************************************************/
 @Service
 public class PersonService implements PersonImplementation {
 
@@ -50,7 +55,7 @@ public class PersonService implements PersonImplementation {
     /**
      * @param idPerson
      * @param persons
-     * @return
+     * @return Person
      * @throws EntityException
      */
     @Override
@@ -71,7 +76,6 @@ public class PersonService implements PersonImplementation {
         if(Objects.nonNull(persons.getAge())){
             personDt.setAge(persons.getAge());
         }
-
         return personRepository.save(personDt);
     }
 
