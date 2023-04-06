@@ -76,6 +76,9 @@ public class PersonService implements PersonImplementation {
         if(Objects.nonNull(persons.getAge())){
             personDt.setAge(persons.getAge());
         }
+        if(Objects.nonNull(persons.getDepartment())){
+            personDt.setDepartment(persons.getDepartment());
+        }
         return personRepository.save(personDt);
     }
 
