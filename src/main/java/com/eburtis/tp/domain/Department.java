@@ -20,9 +20,6 @@ import java.util.List;
  * @version 1.0
  *****************************************************************/
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "departments")
 public class Department {
     @Id
@@ -50,4 +47,62 @@ public class Department {
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = true)
     private Date updatedAt;
+
+    public Department(){
+        super();
+    }
+    public Department(Long id, String code, String designation, List<Person> persons) {
+        this.id = id;
+        this.code = code;
+        this.designation = designation;
+        this.persons = persons;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
+    }
 }

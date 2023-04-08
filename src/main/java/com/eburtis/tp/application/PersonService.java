@@ -5,6 +5,7 @@ import com.eburtis.tp.domain.PersonRepository;
 import com.eburtis.tp.exceptions.EntityException;
 import com.eburtis.tp.infrastructure.PersonImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class PersonService implements PersonImplementation {
     public Person fetchPerson(Long idPerson) throws EntityException {
         Optional<Person> person = personRepository.findById(idPerson);
         if (!person.isPresent()) {
-            throw new EntityException("Person not found");
+            throw new EntityException("Person not found", HttpStatus.NOT_FOUND);
         }
         return person.get();
     }
@@ -63,7 +64,7 @@ public class PersonService implements PersonImplementation {
         Optional<Person> findPerson = personRepository.findById(idPerson);
 
         if (!findPerson.isPresent()) {
-            throw new EntityException("No value present");
+            throw new EntityException("No value present", HttpStatus.NOT_FOUND);
         }
 
         Person personDt = personRepository.findById(idPerson).get();
@@ -90,7 +91,7 @@ public class PersonService implements PersonImplementation {
     public void deletePerson(Long idPerson) throws EntityException {
         Optional<Person> person = personRepository.findById(idPerson);
         if (!person.isPresent()) {
-            throw new EntityException("Person not available ");
+            throw new EntityException("Person not available ", HttpStatus.NOT_FOUND);
         }
         personRepository.deleteById(idPerson);
     }

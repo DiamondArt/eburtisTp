@@ -7,6 +7,8 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -31,10 +33,12 @@ public class DepartmentController {
      * @return Department
      * **********************************/
     @GetMapping("{id}")
-    public Department fetchDepartmentById(@PathVariable("id") Long idDepartment) throws EntityException {
+    public ResponseEntity<Department> fetchDepartmentById(@PathVariable("id") Long idDepartment) throws EntityException {
 
         LOGGER.info("Inside fetchDepartmentByID DepartmentController ");
-        return departmentService.fetchDepartment(idDepartment);
+        Department department1 = departmentService.fetchDepartment(idDepartment);
+        return ResponseEntity.status(HttpStatus.OK).body(department1);
+
     }
 
     /************************************
@@ -42,9 +46,11 @@ public class DepartmentController {
      * @return List of department
      * **********************************/
     @GetMapping()
-    public List<Department> fetchAllDepartment(){
+    public ResponseEntity<List<Department>> fetchAllDepartment() {
+
         LOGGER.info("Inside fetchAllDepartment: fetch All Department  ");
-        return departmentService.fetchDepartmentList();
+        List<Department> departmentList = departmentService.fetchDepartmentList();
+        return ResponseEntity.status(HttpStatus.OK).body(departmentList);
     }
 
     /************************************
@@ -53,11 +59,12 @@ public class DepartmentController {
      * @return String
      * **********************************/
     @DeleteMapping("{id}")
-    public String deleteDepartment(@PathVariable("id") Long idDepartment) throws EntityException {
+    public ResponseEntity<String> deleteDepartment(@PathVariable("id") Long idDepartment) throws EntityException {
 
         LOGGER.info("Inside delete Department DepartmentController ");
         departmentService.deleteDepartment(idDepartment);
-        return "Success";
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+
     }
 
     /************************************
@@ -66,9 +73,12 @@ public class DepartmentController {
      * @return Department
      * **********************************/
     @PostMapping()
-    public Department saveDepartment(@Validated @RequestBody Department department) {
+    public ResponseEntity<Department> saveDepartment(@Validated @RequestBody Department department) {
+
         LOGGER.info("Inside SaveDepartment DepartmentController ");
-        return departmentService.saveDepartment(department);
+        Department department1 = departmentService.saveDepartment(department);
+        return ResponseEntity.status(HttpStatus.CREATED).body(department1);
+
     }
 
     /************************************
@@ -78,8 +88,10 @@ public class DepartmentController {
      * @return Department
      * **********************************/
     @PutMapping("{id}")
-    public Department updateDepartment(@PathVariable("id") Long idDepartment, @Valid @RequestBody Department department) throws EntityException{
+    public ResponseEntity<Department> updateDepartment(@PathVariable("id") Long idDepartment, @Valid @RequestBody Department department) throws EntityException{
+
         LOGGER.info("Inside updateDepartment DepartmentController ");
-        return  departmentService.updateDepartment(idDepartment, department);
+        Department department1 =  departmentService.updateDepartment(idDepartment, department);
+        return ResponseEntity.status(HttpStatus.OK).body(department1);
     }
 }

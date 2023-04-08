@@ -1,5 +1,7 @@
 package com.eburtis.tp.exceptions;
 
+import org.springframework.http.HttpStatus;
+
 /*******************************************************************
  * Entity Exception Formatting
  * @author  Melissa Kouadio
@@ -10,7 +12,7 @@ public class EntityException extends  Exception{
         super();
     }
 
-    public EntityException(String message) {
+    public EntityException(String message, HttpStatus status) {
         super(message);
     }
 

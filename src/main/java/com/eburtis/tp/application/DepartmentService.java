@@ -5,6 +5,7 @@ import com.eburtis.tp.domain.DepartmentRepository;
 import com.eburtis.tp.exceptions.EntityException;
 import com.eburtis.tp.infrastructure.DepartmentImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,7 +49,7 @@ public class DepartmentService implements DepartmentImplementation {
     public Department fetchDepartment(Long idDepartment) throws EntityException {
         Optional<Department> department = departmentRepository.findById(idDepartment);
         if (!department.isPresent()) {
-            throw new EntityException("department not found");
+            throw new EntityException("department not found",HttpStatus.NOT_FOUND);
         }
         return department.get();
     }
@@ -64,7 +65,7 @@ public class DepartmentService implements DepartmentImplementation {
         Optional<Department> findDepartment = departmentRepository.findById(idDepartment);
 
         if (!findDepartment.isPresent()) {
-            throw new EntityException("No value present");
+            throw new EntityException("No value present", HttpStatus.NOT_FOUND);
         }
 
         Department departmentDt = departmentRepository.findById(idDepartment).get();
@@ -86,7 +87,7 @@ public class DepartmentService implements DepartmentImplementation {
     public void deleteDepartment(Long idDepartment) throws EntityException {
         Optional<Department> department = departmentRepository.findById(idDepartment);
         if (!department.isPresent()) {
-            throw new EntityException("department not available ");
+            throw new EntityException("department not available ", HttpStatus.NOT_FOUND);
         }
         departmentRepository.deleteById(idDepartment);
     }

@@ -3,9 +3,6 @@ package com.eburtis.tp.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import java.util.Date;
@@ -16,9 +13,6 @@ import java.util.Date;
  * @version 1.0
  *****************************************************************/
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "persons")
 public class Person {
 
@@ -50,4 +44,72 @@ public class Person {
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = true)
     private Date updatedAt;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Person(){
+        super();
+    }
+    public Person(Long id, String firstname, String lastname, int age, Department department) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.age = age;
+        this.department = department;
+    }
+
 }

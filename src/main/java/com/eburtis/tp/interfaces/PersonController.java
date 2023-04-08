@@ -7,6 +7,8 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,10 +34,12 @@ public class PersonController {
      * @return Person
      * **********************************/
     @GetMapping("{id}")
-    public Person fetchPersonById(@PathVariable("id") Long idPerson) throws EntityException {
+    public ResponseEntity<Person> fetchPersonById(@PathVariable("id") Long idPerson) throws EntityException {
 
         LOGGER.info("Inside fetchPersonByID PersonController ");
-        return personService.fetchPerson(idPerson);
+        Person ps = personService.fetchPerson(idPerson);
+        return ResponseEntity.status(HttpStatus.OK).body(ps);
+
     }
 
     /************************************
@@ -43,9 +47,11 @@ public class PersonController {
      * @return List of Persons
      * **********************************/
     @GetMapping()
-    public List<Person> fetchAllPerson(){
+    public ResponseEntity<?> fetchAllPerson(){
         LOGGER.info("Inside fetchAllPerson: fetch All Person  ");
-        return personService.fetchPersonList();
+        List<Person> personList = personService.fetchPersonList();
+        return ResponseEntity.status(HttpStatus.OK).body(personList);
+
     }
 
     /************************************
@@ -54,11 +60,11 @@ public class PersonController {
      * @return String success
      * **********************************/
     @DeleteMapping("{id}")
-    public String deletePerson(@PathVariable("id") Long idPerson) throws EntityException {
+    public ResponseEntity<?> deletePerson(@PathVariable("id") Long idPerson) throws EntityException {
 
         LOGGER.info("Inside delete Person PersonController ");
         personService.deletePerson(idPerson);
-        return "Success";
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 
     /************************************
@@ -67,9 +73,10 @@ public class PersonController {
      * @return Person
      * **********************************/
     @PostMapping()
-    public Person savePerson(@Validated @RequestBody Person person) {
+    public ResponseEntity<Person> savePerson(@Validated @RequestBody Person person) {
         LOGGER.info("Inside SavePerson PersonController ");
-        return personService.savePerson(person);
+        Person ps = personService.savePerson(person);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ps);
     }
 
     /************************************
@@ -79,8 +86,9 @@ public class PersonController {
      * @return Person
      * **********************************/
     @PutMapping("{id}")
-    public Person updatePerson(@PathVariable("id") Long idPerson, @Valid @RequestBody Person person) throws EntityException{
+    public ResponseEntity<Person>  updatePerson(@PathVariable("id") Long idPerson, @Valid @RequestBody Person person) throws EntityException{
         LOGGER.info("Inside updatePerson PersonController ");
-        return  personService.updatePerson(idPerson, person);
+        Person ps = personService.updatePerson(idPerson, person);
+        return ResponseEntity.status(HttpStatus.OK).body(ps);
     }
 }

@@ -2,11 +2,7 @@ package com.eburtis.tp.exceptions;
 
 import org.springframework.lang.Nullable;
 
-/*******************************************************************
- * Not Found Exception Message controller
- * @author  Melissa Kouadio
- * @version 1.0
- *****************************************************************/
+
 public class NotFoundException extends Exception {
     private String id;
     private Class aClass;
@@ -22,7 +18,6 @@ public class NotFoundException extends Exception {
 
     @Override
     public String getMessage() {
-
         if (id == null) {
             return String.format("%s not found.", aClass.getSimpleName());
         }
