@@ -1,7 +1,6 @@
 package com.eburtis.tp.infrastructure;
 
-import com.eburtis.tp.domain.Department;
-import com.eburtis.tp.exceptions.EntityException;
+import com.eburtis.tp.domain.department.Department;
 import java.util.List;
 
 /*******************************************************************
@@ -16,10 +15,10 @@ public interface DepartmentImplementation {
 
     List<Department> fetchDepartmentList();
 
-    Department fetchDepartment(Long idDepartment) throws EntityException;
+    Department fetchDepartment(Long idDepartment) ;
 
-    void deleteDepartment(Long idDepartment) throws EntityException;
+    void deleteDepartment(Long idDepartment) ;
 
-    Department updateDepartment(Long idDepartment, Department department) throws EntityException;
+    Department updateDepartment(Long idDepartment, Department department) ;
 
 }

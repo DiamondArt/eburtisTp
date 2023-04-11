@@ -1,8 +1,7 @@
 package com.eburtis.tp.interfaces;
 
 import com.eburtis.tp.application.DepartmentService;
-import com.eburtis.tp.domain.Department;
-import com.eburtis.tp.exceptions.EntityException;
+import com.eburtis.tp.domain.department.Department;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +32,7 @@ public class DepartmentController {
      * @return Department
      * **********************************/
     @GetMapping("{id}")
-    public ResponseEntity<Department> fetchDepartmentById(@PathVariable("id") Long idDepartment) throws EntityException {
+    public ResponseEntity<Department> fetchDepartmentById(@PathVariable("id") Long idDepartment) {
 
         LOGGER.info("Inside fetchDepartmentByID DepartmentController ");
         Department department1 = departmentService.fetchDepartment(idDepartment);
@@ -59,7 +58,7 @@ public class DepartmentController {
      * @return String
      * **********************************/
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteDepartment(@PathVariable("id") Long idDepartment) throws EntityException {
+    public ResponseEntity<String> deleteDepartment(@PathVariable("id") Long idDepartment) {
 
         LOGGER.info("Inside delete Department DepartmentController ");
         departmentService.deleteDepartment(idDepartment);
@@ -88,7 +87,7 @@ public class DepartmentController {
      * @return Department
      * **********************************/
     @PutMapping("{id}")
-    public ResponseEntity<Department> updateDepartment(@PathVariable("id") Long idDepartment, @Valid @RequestBody Department department) throws EntityException{
+    public ResponseEntity<Department> updateDepartment(@PathVariable("id") Long idDepartment, @Valid @RequestBody Department department){
 
         LOGGER.info("Inside updateDepartment DepartmentController ");
         Department department1 =  departmentService.updateDepartment(idDepartment, department);

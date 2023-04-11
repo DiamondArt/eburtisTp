@@ -1,8 +1,7 @@
 package com.eburtis.tp.application;
 
-import com.eburtis.tp.domain.Department;
-import com.eburtis.tp.domain.DepartmentRepository;
-import com.eburtis.tp.exceptions.EntityException;
+import com.eburtis.tp.domain.department.Department;
+import com.eburtis.tp.domain.department.DepartmentRepository;
 import com.eburtis.tp.infrastructure.DepartmentImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,13 +42,12 @@ public class DepartmentService implements DepartmentImplementation {
     /**
      * @param idDepartment
      * @return
-     * @throws EntityException
      */
     @Override
-    public Department fetchDepartment(Long idDepartment) throws EntityException {
+    public Department fetchDepartment(Long idDepartment)  {
         Optional<Department> department = departmentRepository.findById(idDepartment);
         if (!department.isPresent()) {
-            throw new EntityException("department not found",HttpStatus.NOT_FOUND);
+            //throw new EntityException("department not found",HttpStatus.NOT_FOUND);
         }
         return department.get();
     }
@@ -58,14 +56,13 @@ public class DepartmentService implements DepartmentImplementation {
      * @param idDepartment
      * @param department
      * @return
-     * @throws EntityException
      */
     @Override
-    public Department updateDepartment(Long idDepartment, Department department) throws EntityException {
+    public Department updateDepartment(Long idDepartment, Department department)  {
         Optional<Department> findDepartment = departmentRepository.findById(idDepartment);
 
         if (!findDepartment.isPresent()) {
-            throw new EntityException("No value present", HttpStatus.NOT_FOUND);
+            // throw new EntityException("No value present", HttpStatus.NOT_FOUND);
         }
 
         Department departmentDt = departmentRepository.findById(idDepartment).get();
@@ -81,13 +78,12 @@ public class DepartmentService implements DepartmentImplementation {
 
     /**
      * @param idDepartment
-     * @throws EntityException
      */
     @Override
-    public void deleteDepartment(Long idDepartment) throws EntityException {
+    public void deleteDepartment(Long idDepartment) {
         Optional<Department> department = departmentRepository.findById(idDepartment);
         if (!department.isPresent()) {
-            throw new EntityException("department not available ", HttpStatus.NOT_FOUND);
+            //throw new EntityException("department not available ", HttpStatus.NOT_FOUND);
         }
         departmentRepository.deleteById(idDepartment);
     }

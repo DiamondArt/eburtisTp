@@ -1,8 +1,8 @@
 package com.eburtis.tp.interfaces;
 
 import com.eburtis.tp.application.PersonService;
-import com.eburtis.tp.domain.Person;
-import com.eburtis.tp.exceptions.EntityException;
+import com.eburtis.tp.domain.person.Person;
+import com.eburtis.tp.domain.person.PersonVo;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,10 +34,10 @@ public class PersonController {
      * @return Person
      * **********************************/
     @GetMapping("{id}")
-    public ResponseEntity<Person> fetchPersonById(@PathVariable("id") Long idPerson) throws EntityException {
+    public ResponseEntity<PersonVo> fetchPersonById(@PathVariable("id") Long idPerson) {
 
         LOGGER.info("Inside fetchPersonByID PersonController ");
-        Person ps = personService.fetchPerson(idPerson);
+        PersonVo ps = personService.findById(idPerson);
         return ResponseEntity.status(HttpStatus.OK).body(ps);
 
     }
@@ -49,7 +49,7 @@ public class PersonController {
     @GetMapping()
     public ResponseEntity<?> fetchAllPerson(){
         LOGGER.info("Inside fetchAllPerson: fetch All Person  ");
-        List<Person> personList = personService.fetchPersonList();
+        List<PersonVo> personList = personService.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(personList);
 
     }
@@ -60,10 +60,10 @@ public class PersonController {
      * @return String success
      * **********************************/
     @DeleteMapping("{id}")
-    public ResponseEntity<?> deletePerson(@PathVariable("id") Long idPerson) throws EntityException {
+    public ResponseEntity<?> deletePerson(@PathVariable("id") Long idPerson)  {
 
         LOGGER.info("Inside delete Person PersonController ");
-        personService.deletePerson(idPerson);
+        personService.delete(idPerson);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 
@@ -73,9 +73,9 @@ public class PersonController {
      * @return Person
      * **********************************/
     @PostMapping()
-    public ResponseEntity<Person> savePerson(@Validated @RequestBody Person person) {
+    public ResponseEntity<PersonVo> savePerson(@Validated @RequestBody PersonVo person) {
         LOGGER.info("Inside SavePerson PersonController ");
-        Person ps = personService.savePerson(person);
+        PersonVo ps = personService.save(person);
         return ResponseEntity.status(HttpStatus.CREATED).body(ps);
     }
 
@@ -86,9 +86,9 @@ public class PersonController {
      * @return Person
      * **********************************/
     @PutMapping("{id}")
-    public ResponseEntity<Person>  updatePerson(@PathVariable("id") Long idPerson, @Valid @RequestBody Person person) throws EntityException{
+    public ResponseEntity<PersonVo> updatePerson(@PathVariable("id") Long idPerson, @Valid @RequestBody PersonVo person){
         LOGGER.info("Inside updatePerson PersonController ");
-        Person ps = personService.updatePerson(idPerson, person);
+        PersonVo ps = personService.updatePerson(idPerson, person);
         return ResponseEntity.status(HttpStatus.OK).body(ps);
     }
 }

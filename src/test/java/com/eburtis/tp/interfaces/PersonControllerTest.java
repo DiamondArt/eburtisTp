@@ -1,6 +1,6 @@
 package com.eburtis.tp.interfaces;
 
-import com.eburtis.tp.domain.PersonRepository;
+import com.eburtis.tp.domain.person.PersonRepository;
 import org.json.JSONObject;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -169,6 +169,6 @@ public class PersonControllerTest {
                 .andDo(print())
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.error", is("Not Found")))
-                .andExpect(jsonPath("$.reasons[0]", is("Person not found")));
+                .andExpect(jsonPath("$.code", is("PERSON_NOT_FOUND")));
     }
 }

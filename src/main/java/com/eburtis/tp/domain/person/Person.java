@@ -1,5 +1,6 @@
-package com.eburtis.tp.domain;
+package com.eburtis.tp.domain.person;
 
+import com.eburtis.tp.domain.department.Department;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

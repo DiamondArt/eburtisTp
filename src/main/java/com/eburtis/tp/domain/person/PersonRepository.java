@@ -1,5 +1,6 @@
-package com.eburtis.tp.domain;
+package com.eburtis.tp.domain.person;
 
+import com.eburtis.tp.domain.person.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 /*******************************************************************

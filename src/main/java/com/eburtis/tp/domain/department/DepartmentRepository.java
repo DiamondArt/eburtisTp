@@ -1,5 +1,6 @@
-package com.eburtis.tp.domain;
+package com.eburtis.tp.domain.department;
 
+import com.eburtis.tp.domain.department.Department;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

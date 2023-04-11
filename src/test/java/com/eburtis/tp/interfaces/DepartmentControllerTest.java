@@ -1,7 +1,6 @@
 package com.eburtis.tp.interfaces;
 
-import com.eburtis.tp.domain.DepartmentRepository;
-import com.eburtis.tp.domain.PersonRepository;
+import com.eburtis.tp.domain.department.DepartmentRepository;
 import org.json.JSONObject;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
