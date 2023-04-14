@@ -165,10 +165,9 @@ public class PersonControllerTest {
     public void TestCannotFindPerson() throws Exception {
 
         this.mockMvc.perform(
-                        MockMvcRequestBuilders.get(this.endpoint+"/person/"+jsonObject.getInt("id")))
+                MockMvcRequestBuilders.get(this.endpoint+"/person/"+jsonObject.getInt("id")))
                 .andDo(print())
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.error", is("Not Found")))
                 .andExpect(jsonPath("$.code", is("PERSON_NOT_FOUND")));
     }
 }

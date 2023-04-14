@@ -1,0 +1,7 @@
+2023-04-12T17:35:50.300+02:00  WARN 3040 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-12T18:13:23.939+02:00  WARN 1688 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-12T18:17:30.486+02:00  WARN 1688 --- [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.eburtis.tp.exceptions.EntityNotFoundException: No value present]
+2023-04-12T18:17:31.658+02:00  WARN 1688 --- [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.eburtis.tp.exceptions.EntityNotFoundException: No value present]
+2023-04-12T18:17:36.217+02:00 ERROR 1688 --- [http-nio-8080-exec-3] c.e.t.i.PersonImplementation             : Person ID is null
+2023-04-12T18:17:36.218+02:00  WARN 1688 --- [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.eburtis.tp.exceptions.EntityNotFoundException: Person not available ]
+2023-04-12T18:19:00.065+02:00 ERROR 32116 --- [http-nio-8080-exec-2] c.e.t.i.PersonImplementation             : Person ID is null

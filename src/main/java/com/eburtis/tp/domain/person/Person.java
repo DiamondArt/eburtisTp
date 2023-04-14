@@ -6,11 +6,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 import java.util.Date;
 
 /*******************************************************************
  * Person Entity
- * @author  Melissa Kouadio
+ * @author Melissa Kouadio
  * @version 1.0
  *****************************************************************/
 @Entity
@@ -21,21 +22,17 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "the field firstname is required")
-    @NotBlank(message = "the field firstname cannot blank")
-    @Column(name = "firstname", nullable = false)
-    private String firstname;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
-    @NotNull(message = "the field lastname is required")
-    @NotBlank(message = "the field lastname cannot blank")
-    @Column(name = "lastname", nullable = false)
-    private String lastname;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
     @Column(name = "age", nullable = false)
     private int age;
 
     @ManyToOne
-    @JoinColumn(name = "id_department")
+    @JoinColumn(name = Department.TABLE_ID)
     private Department department;
 
     @CreationTimestamp
@@ -43,72 +40,57 @@ public class Person {
     private Date createdAt;
 
     @UpdateTimestamp
-    @Column(name = "updated_at", nullable = true)
+    @Column(name = "updated_at")
     private Date updatedAt;
 
     public Long getId() {
         return id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public int getAge() {
         return age;
     }
 
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Department getDepartment() {
+        return department;
     }
 
     public void setDepartment(Department department) {
         this.department = department;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public Person(){
+    public Person() {
         super();
     }
+
     public Person(Long id, String firstname, String lastname, int age, Department department) {
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstname;
+        this.lastName = lastname;
         this.age = age;
         this.department = department;
     }

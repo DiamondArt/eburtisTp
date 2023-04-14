@@ -5,16 +5,18 @@ import com.eburtis.tp.domain.person.Person;
 import com.eburtis.tp.domain.person.PersonRepository;
 import com.eburtis.tp.domain.person.PersonVo;
 import com.eburtis.tp.exceptions.*;
-import com.eburtis.tp.validator.PersonValidator;
+import com.eburtis.tp.validator.EntityValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 
 /*******************************************************************
@@ -39,11 +41,12 @@ public class PersonImplementation implements PersonService {
      */
     @Override
     public PersonVo save(PersonVo person) {
-        List<String> errors = PersonValidator.validate(person);
+        List<String> errors = EntityValidator.personValidate(person);
         if (!errors.isEmpty()) {
             log.error("Person is not valid {}", person);
             throw new InvalidEntityException("Personne n'est pas valide", ErrorCodes.PERSON_NOT_VALID, errors);
         }
+
 
         return PersonVo.fromEntity(
                 personRepository.save(
@@ -57,9 +60,9 @@ public class PersonImplementation implements PersonService {
      */
     @Override
     public List<PersonVo> findAll() {
-        return personRepository.findAll().stream()
+        return personRepository.findAll(Sort.by(Sort.Direction.DESC, "id")).stream()
                 .map(PersonVo::fromEntity)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     /**
@@ -85,7 +88,7 @@ public class PersonImplementation implements PersonService {
      * @return PersonVo
      */
     @Override
-    public PersonVo updatePerson(Long idPerson, PersonVo person) {
+    public Person updatePerson(Long idPerson, PersonVo person) {
 
         Optional<Person> findPerson = personRepository.findById(idPerson);
 
@@ -93,19 +96,20 @@ public class PersonImplementation implements PersonService {
             throw new EntityNotFoundException("No value present", ErrorCodes.PERSON_NOT_FOUND);
         }
 
-        List<String> errors = PersonValidator.validate(person);
+        List<String> errors = EntityValidator.personValidate(person);
         if (!errors.isEmpty()) {
             log.error("Person is not valid {}", person);
             throw new InvalidEntityException("L'article n'est pas valide", ErrorCodes.PERSON_NOT_VALID, errors);
         }
 
-        PersonVo personDt = PersonVo.fromEntity(personRepository.findById(idPerson).get());
+        Person personDt = findPerson.get();
 
+        // TODO faire au front
         if(Objects.nonNull(person.getFirstname()) &&!"".equalsIgnoreCase(person.getFirstname())){
-            personDt.setFirstname(person.getFirstname());
+            personDt.setFirstName(person.getFirstname());
         }
         if(Objects.nonNull(person.getLastname()) &&!"".equalsIgnoreCase(person.getLastname())){
-            personDt.setLastname(person.getLastname());
+            personDt.setLastName(person.getLastname());
         }
         if(Objects.nonNull(person.getAge())){
             personDt.setAge(person.getAge());
@@ -114,11 +118,7 @@ public class PersonImplementation implements PersonService {
             personDt.setDepartment(person.getDepartment());
         }
 
-        return PersonVo.fromEntity(
-                personRepository.save(
-                        PersonVo.toEntity(personDt)
-                )
-        );
+        return personRepository.save(personDt);
     }
 
     /**

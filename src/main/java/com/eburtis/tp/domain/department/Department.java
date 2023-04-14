@@ -14,23 +14,25 @@ import java.util.List;
 
 /*******************************************************************
  * Department entity
- * @author  Melissa Kouadio
+ * @author Melissa Kouadio
  * @version 1.0
  *****************************************************************/
 @Entity
 @Table(name = "departments")
 public class Department {
+
+    public static final String TABLE_NAME = "department";
+
+    public static final String ID = "id";
+    public static final String TABLE_ID = ID + '_'+  TABLE_NAME ;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "the field code is required")
-    @NotBlank(message = "the field code cannot blank")
     @Column(name = "code", nullable = false)
     private String code;
 
-    @NotNull(message = "the field designation is required")
-    @NotBlank(message = "the field designation cannot blank")
     @Column(name = "designation", nullable = false)
     private String designation;
 
@@ -46,14 +48,14 @@ public class Department {
     @Column(name = "updated_at", nullable = true)
     private Date updatedAt;
 
-    public Department(){
+    public Department() {
         super();
     }
-    public Department(Long id, String code, String designation, List<Person> persons) {
+
+    public Department(Long id, String code, String designation) {
         this.id = id;
         this.code = code;
         this.designation = designation;
-        this.persons = persons;
     }
 
     public Long getId() {

@@ -12,7 +12,7 @@ VALUES
 
 /* Table persons */
 INSERT INTO persons
-(firstname,lastname, age, id_department, created_at, updated_at)
+(first_name,last_name, age, id_department, created_at, updated_at)
 VALUES ('Melissa', 'Kouadio', 56, 1,'2023-04-05','2023-04-05'),
 ('Meldev','Koua',16, 2, '2023-04-05','2023-04-05'),
 ('Fabrice','Konate', 56, 2, '2023-04-05','2023-04-05'),

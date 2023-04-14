@@ -46,7 +46,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     final ErrorVo errorDto = ErrorVo.builder().timestamp(new Date())
         .code(exception.getErrorCode())
         .httpCode(badRequest.value())
-            .message(exception.getMessage()).path(webRequest.getContextPath())
+            .message(exception.getMessage())
+            .path(webRequest.getContextPath())
         .errors(exception.getErrors())
         .build();
 

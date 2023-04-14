@@ -11,6 +11,11 @@ public final  class PersonVo {
     private int age;
     private Department department;
 
+
+    // TODO utiliser un constructeur pour PersonVO de cette manière
+//    public PersonVo(Person person){
+//        this.id = person.getId();
+//    }
     public PersonVo(Long id, String firstName, String lastName, int age, Department department1) {
         this.id = id;
         this.firstname = firstName;
@@ -67,8 +72,8 @@ public final  class PersonVo {
         }
         return PersonVo.builder()
                 .id(person.getId())
-                .firstname(person.getFirstname())
-                .lastname(person.getLastname())
+                .firstname(person.getFirstName())
+                .lastname(person.getLastName())
                 .age(person.getAge())
                 .department(person.getDepartment())
                 .build();
@@ -80,8 +85,8 @@ public final  class PersonVo {
         }
         Person person = new Person();
         person.setId(person.getId());
-        person.setFirstname(personVo.getFirstname());
-        person.setLastname(personVo.getLastname());
+        person.setFirstName(personVo.getFirstname());
+        person.setLastName(personVo.getLastname());
         person.setAge(personVo.getAge());
         person.setDepartment(personVo.getDepartment());
         return person;

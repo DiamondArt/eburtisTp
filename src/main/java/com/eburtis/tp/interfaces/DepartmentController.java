@@ -2,6 +2,7 @@ package com.eburtis.tp.interfaces;
 
 import com.eburtis.tp.application.DepartmentService;
 import com.eburtis.tp.domain.department.Department;
+import com.eburtis.tp.domain.department.DepartmentVo;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,73 +24,72 @@ import java.util.List;
 public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
-    private final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
+    private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
 
 
-    /************************************
+    /**
      * Get department by id
      * @param idDepartment
      * @return Department
-     * **********************************/
+     **/
     @GetMapping("{id}")
-    public ResponseEntity<Department> fetchDepartmentById(@PathVariable("id") Long idDepartment) {
+    public DepartmentVo fetchDepartmentById(@PathVariable("id") Long idDepartment) {
 
-        LOGGER.info("Inside fetchDepartmentByID DepartmentController ");
-        Department department1 = departmentService.fetchDepartment(idDepartment);
-        return ResponseEntity.status(HttpStatus.OK).body(department1);
-
+        logger.info("Inside fetchDepartmentByID DepartmentController ");
+        DepartmentVo department1 = departmentService.findById(idDepartment);
+        return department1;
     }
 
-    /************************************
+    /**
      * Get all departments
      * @return List of department
-     * **********************************/
+     * */
     @GetMapping()
-    public ResponseEntity<List<Department>> fetchAllDepartment() {
+    public List<DepartmentVo> fetchAllDepartment() {
 
-        LOGGER.info("Inside fetchAllDepartment: fetch All Department  ");
-        List<Department> departmentList = departmentService.fetchDepartmentList();
-        return ResponseEntity.status(HttpStatus.OK).body(departmentList);
+        logger.info("Inside fetchAllDepartment: fetch All Department  ");
+        List<DepartmentVo> departmentList = departmentService.findAll();
+        return departmentList;
     }
 
-    /************************************
+    /**
      * delete a department by id
      * @param idDepartment
      * @return String
-     * **********************************/
+     **/
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteDepartment(@PathVariable("id") Long idDepartment) {
+    public ResponseEntity deleteDepartment(@PathVariable("id") Long idDepartment) {
 
-        LOGGER.info("Inside delete Department DepartmentController ");
-        departmentService.deleteDepartment(idDepartment);
+        logger.info("Inside delete Department DepartmentController ");
+        departmentService.delete(idDepartment);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 
     }
 
-    /************************************
+    /**
      * Create a new department
      * @param department
      * @return Department
-     * **********************************/
+     **/
     @PostMapping()
     public ResponseEntity<Department> saveDepartment(@Validated @RequestBody Department department) {
 
-        LOGGER.info("Inside SaveDepartment DepartmentController ");
-        Department department1 = departmentService.saveDepartment(department);
+        logger.info("Inside SaveDepartment DepartmentController ");
+        Department department1 = departmentService.save(department);
         return ResponseEntity.status(HttpStatus.CREATED).body(department1);
 
     }
 
-    /************************************
+    /**
      * Update a department by id
      * @param idDepartment
      * @param department
      * @return Department
-     * **********************************/
+     ***/
     @PutMapping("{id}")
-    public ResponseEntity<Department> updateDepartment(@PathVariable("id") Long idDepartment, @Valid @RequestBody Department department){
+    public ResponseEntity<Department> updateDepartment(@PathVariable("id") Long idDepartment, @Valid @RequestBody DepartmentVo department){
 
-        LOGGER.info("Inside updateDepartment DepartmentController ");
+        logger.info("Inside updateDepartment DepartmentController ");
         Department department1 =  departmentService.updateDepartment(idDepartment, department);
         return ResponseEntity.status(HttpStatus.OK).body(department1);
     }
